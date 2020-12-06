@@ -14,12 +14,18 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
       KAFKA_AUTO_DELETE_TOPICS_ENABLE: "true"
       KAFKA_ZOOKEEPER_CONNECT: "zookeeper-target:2181"
-      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka-target:9092"
-      KAFKA_LISTENERS: "PLAINTEXT://:9092"
+      KAFKA_LISTENERS: PLAINTEXT_DOCKER://:9092,PLAINTEXT_HOST://:29093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT_DOCKER://kafka-target:9092,PLAINTEXT_HOST://localhost:29093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT_DOCKER:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT_DOCKER
       Z: "zookeeper-target:2181"
       K: "kafka-target:9092"
     networks:
       - kafka 
+    ports:
+      - target: 29093
+        published: 29093
+        mode: host
     deploy:
       replicas: 1
       update_config:

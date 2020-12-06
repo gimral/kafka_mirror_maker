@@ -6,11 +6,11 @@ networks:
     attachable: true
 
 configs:
-  mm2.properties:
-    file: ./mm2.properties
+  source_mm2.properties:
+    file: ./source_mm2.properties
 
 services:
-  mmv2:
+  source_mmv2:
     image: gimral/kafka:mm2-2.7
     configs:
       - source: source_mm2.properties 

@@ -6,14 +6,14 @@ networks:
     attachable: true
 
 configs:
-  mm2.properties:
-    file: ./mm2.properties
+  target_mm2.properties:
+    file: ./target_mm2.properties
 
 services:
-  mmv2:
+  target_mmv2:
     image: gimral/kafka:mm2-2.7
     configs:
-      - source: source_mm2.properties 
+      - source: target_mm2.properties 
         target: /opt/kafka/config/mm2.properties
     environment:
       KAFKA_HEAP_OPTS: "-Xmx2G -Xms2G"
